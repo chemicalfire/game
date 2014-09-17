@@ -8,6 +8,8 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My Web Application',
+	'defaultController' => 'home', // set default controller to HomeController
+	'theme' => 'metronic',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -55,7 +57,8 @@ return array(
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
-			'errorAction'=>'site/error',
+			// 'errorAction'=>'site/error',
+			'errorAction' => 'home/error',
 		),
 
 		'log'=>array(
