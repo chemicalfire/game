@@ -14,10 +14,14 @@
 	<meta content="" name="author">
 	<!-- <link rel="stylesheet" type="text/css" href="<?php //echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection"> -->
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
-
+	<!-- Uncomment the google fonts api if it dosen't cost much time to load -->
+	<!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all"> -->
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/simple-line-icons/simple-line-icons.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap/css/bootstrap.min.css">
 	<!-- END GLOBAL MANDATORY STYLES -->
 	<!-- BEGIN PAGE LEVEL PLUGIN STYLE -->
-
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css">
 	<!-- END PAGE LEVEL PLUGIN STYLE -->
 	<!-- BEGIN PAGE LEVEL STYLES -->
 
@@ -359,6 +363,7 @@
 	<div class="clearfix"></div>
 	<!-- BEGIN CONTAINER -->
 	<div class="container">
+		<!-- BEGIN PAGE CONTAINER -->
 		<div class="page-container">
 			<!-- BEGIN SIDEBAR -->
 			<div class="page-sidebar-wrapper">
@@ -458,14 +463,121 @@
 									<option value="boxed">Boxed</option>
 								</select>
 							</div>
+							<div class="theme-option">
+								<span> Header </span>
+								<select class="page-header-option form-control input-small">
+									<option value="fixed" selected="selected">Fixed</option>
+									<option value="default">Default</option>
+								</select>
+							</div>
+							<div class="theme-option">
+								<span> Sidebar Mode </span>
+								<select class="sidebar-option form-control input-small">
+									<option value="fixed">Fixed</option>
+									<option value="default" selected="selected">Default</option>
+								</select>
+							</div>
+							<div class="theme-option">
+								<span> Sidebar Style </span>
+								<select class="sidebar-style-option form-control input-small">
+									<option value="default" selected="selected">Default</option>
+									<option value="compact">Compact</option>
+								</select>
+							</div>
+							<div class="theme-option">
+								<span> Sidebar Menu </span>
+								<select class="sidebar-menu-option form-control input-small">
+									<option value="accordion" selected="selected">Accordion</option>
+									<option value="hover">Hover</option>
+								</select>
+							</div>
+							<div class="theme-option">
+								<span> Sidebar Position </span>
+								<select class="sidebar-pos-option form-control input-small">
+									<option value="left" selected="selected">Left</option>
+									<option value="right">Right</option>
+								</select>
+							</div>
+							<div class="theme-option">
+								<span> Footer </span>
+								<select class="page-footer-option form-control input-small">
+									<option value="fixed">Fixed</option>
+									<option value="default" selected="selected">Default</option>
+								</select>
+							</div>
 						</div>
 					</div>
 					<!-- END STYLE CUSTOMIZER -->
+					<!-- BEGIN PAGE HEADER -->
+					<h3 class="page-title">Dashboard</h3>
+					<div class="page-bar">
+						<ul class="page-breadcrumb">
+							<li>
+								<i class="fa fa-home"></i>
+								<a href="<?php echo Yii::app()->baseUrl; ?>"></a>
+								<i class="fa fa-angle-right"></i>
+							</li>
+							<li>
+								<a href="#">Dashborad</a>
+							</li>
+						</ul>
+						<div class="page-toolbar">
+							<div id="dashboard-report-range" class="tooltips btn btn-fit-height btn-sm green-haze btn-dashboard-daterange" data-container="body" data-placement="left" data-original-title="Change dashboard date range">
+								<i class="icon-calendar"></i>
+								&nbsp;&nbsp;
+								<i class="fa fa-angle-down"></i>
+								&nbsp;&nbsp;
+								<span class="thin uppercase visible-lg-inline-block"></span>&nbsp;<i class="fa fa-angle-down"></i>
+							</div>
+						</div>
+					</div>
+					<!-- END PAGE HEADER -->
+					<!-- BEGIN MAIN CONTENT -->
+					<div id="main-content">
+						<?php echo $content; ?>
+					</div>
+					<!-- END MAIN CONTENT -->
 				</div>
 			</div>
 			<!-- END CONTENT -->
 		</div>
+		<!-- END PAGE CONTAINER -->
+		<!-- BEGIN FOOTER -->
+		<div class="page-footer">
+			<div class="page-footer-inner">
+				2014 &copy; Metronic by keenthemes.
+			</div>
+			<div class="scroll-to-top">
+				<i class="icon-arrow-up"></i>
+			</div>
+		</div>
+		<!-- END FOOTER -->
 	</div>
 	<!-- END CONTAINER -->
+	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+	<!-- BEGIN CORE PLUGINS -->
+	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/jquery-migrate-1.2.1.min.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" srr="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- END CORE PLUGINS -->
+	<!-- BEGIN PAGE LEVEL PLUGINS -->
+	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+	<!-- END PAGE LEVEL PLUGINS -->
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/scripts/metronic.js"></script>
+	<!-- END PAGE LEVEL SCRIPTS -->
+	<script type="text/javascript">
+	jQuery(document).ready(function() {
+		Metronic.init();
+	});
+	</script>
+	<!-- END JAVASCRIPTS -->
+	<script type="text/javascript">
+	// statistics scripts
+	</script>
 </body>
 </html>
