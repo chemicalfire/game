@@ -81,8 +81,17 @@ return array(
 
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
-	'params'=>array(
+	'params' => array(
 		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+		'adminEmail' => 'llw.liuliwu@gmail.com',
+		// vms developers
+		'developers' => array(
+			array('name' => 'liuliwu', 'email' => 'llw.liuliwu@gmail.com'),
+		),
+		// theme params
+		'theme' => array(
+			'body_classes' => 'page-boxed page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo',
+			'logo_file' => '',
+		),
 	),
 );
