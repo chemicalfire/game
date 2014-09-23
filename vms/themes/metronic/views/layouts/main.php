@@ -15,7 +15,7 @@
 	<!-- <link rel="stylesheet" type="text/css" href="<?php //echo Yii::app()->request->baseUrl; ?>/css/screen.css" media="screen, projection"> -->
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 	<!-- Uncomment the google fonts api if it dosen't cost much time to load -->
-	<!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all"> -->
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/css/google-font.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/simple-line-icons/simple-line-icons.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap/css/bootstrap.min.css">
@@ -27,7 +27,11 @@
 
 	<!-- END PAGE LEVEL STYLES -->
 	<!-- BEGIN THEME STYLES -->
-
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/css/components.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/css/plugins.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/admin/layout/css/layout.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/admin/layout/css/themes/default.css" id="style_color">
+	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/admin/layout/css/custom.css">
 	<!-- END THEME STYLES -->
 	<link rel="shortcut icon" href="favicon.ico">
 </head>
@@ -124,7 +128,7 @@
 			<div class="page-top">
 				<!-- BEGIN HEADER SEARCH BOX -->
 				<!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
-				<form class="search search-form-expanded" action="" action="GET">
+				<form class="search-form search-form-expanded" action="" action="GET">
 					<div class="input-group">
 						<input type="text" class="form-control" placeholder="Search..." name="query">
 						<span class="input-group-btn">
@@ -224,7 +228,7 @@
 								</li>
 								<li class="external">
 									<a href="#">
-										See all notifications <i class="icon-arraw-right"></i>
+										See all notifications <i class="icon-arrow-right"></i>
 									</a>
 								</li>
 							</ul>
@@ -304,11 +308,13 @@
 						</li>
 						<!-- END TODO DROPDOWN -->
 						<!-- BEGIN QUICK SIDEBAR TOGGLER -->
+						<!--
 						<li class="dropdown dropdown-quick-sidebar-toggler">
 							<a href="javascript:;" class="dropdown-toggle">
 								<i class="icon-logout"></i>
 							</a>
 						</li>
+						-->
 						<!-- END QUICK SIDEBAR TOGGLER -->
 						<!-- BEGIN USER LOGIN DROPDOWN -->
 						<li class="dropdown dropdown-user">
@@ -438,7 +444,7 @@
 					</div>
 					<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM -->
 					<!-- BEGIN STYLE CUSTOMIZER -->
-					<div class="theme-panel">
+					<!--<div class="theme-panel">
 						<div class="toggler tooltips" data-container="body" data-placement="left" data-html="true" data-original-title="Click to open advance theme customizer panel">
 							<i class="icon-settings"></i>
 						</div>
@@ -506,7 +512,7 @@
 								</select>
 							</div>
 						</div>
-					</div>
+					</div>-->
 					<!-- END STYLE CUSTOMIZER -->
 					<!-- BEGIN PAGE HEADER -->
 					<h3 class="page-title">Dashboard</h3>
@@ -560,7 +566,7 @@
 	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js"></script>
 	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" srr="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
 	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<!-- END CORE PLUGINS -->
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -569,10 +575,57 @@
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/scripts/metronic.js"></script>
+	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/admin/layout/scripts/layout.js"></script>
 	<!-- END PAGE LEVEL SCRIPTS -->
 	<script type="text/javascript">
 	jQuery(document).ready(function() {
+		Metronic.setAssetsPath('<?php echo Yii::app()->baseUrl; ?>/themes/assets/');
+		Metronic.setGlobalImgPath('<?php echo Yii::app()->baseUrl; ?>/themes/assets/global/img/');
 		Metronic.init();
+		Layout.init();
+		$('#dashboard-report-range').daterangepicker({
+		        opens: (Metronic.isRTL() ? 'right' : 'left'),
+		        startDate: moment().subtract(29, 'days'),
+		        endDate: moment(),
+		        minDate: '01/01/2012',
+		        maxDate: '12/31/2014',
+		        dateLimit: {
+		            days: 60
+		        },
+		        showDropdowns: false,
+		        showWeekNumbers: true,
+		        timePicker: false,
+		        timePickerIncrement: 1,
+		        timePicker12Hour: true,
+		        ranges: {
+		            'Today': [moment(), moment()],
+		            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+		            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+		            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+		            'This Month': [moment().startOf('month'), moment().endOf('month')],
+		            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+		        },
+		        buttonClasses: ['btn btn-sm'],
+		        applyClass: ' blue',
+		        cancelClass: 'default',
+		        format: 'MM/DD/YYYY',
+		        separator: ' to ',
+		        locale: {
+		            applyLabel: 'Apply',
+		            fromLabel: 'From',
+		            toLabel: 'To',
+		            customRangeLabel: 'Custom Range',
+		            daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+		            monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+		            firstDay: 1
+		        }
+		    },
+		    function (start, end) {
+		        $('#dashboard-report-range span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+		    }
+		);
+		$('#dashboard-report-range span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+		$('#dashboard-report-range').show();
 	});
 	</script>
 	<!-- END JAVASCRIPTS -->
