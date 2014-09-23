@@ -35,7 +35,7 @@
 	<!-- END THEME STYLES -->
 	<link rel="shortcut icon" href="favicon.ico">
 </head>
-<body class="<?php echo Yii::app()->getParams()->theme['body_classes']; ?>">
+<body class="<?php echo implode(' ', Yii::app()->getParams()->theme['body_classes']); ?>">
 	<!-- BEGIN HEADER -->
 	<div class="page-header navbar navbar-fixed-top">
 		<!-- BEGIN HEADER INNER -->

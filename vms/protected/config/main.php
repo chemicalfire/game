@@ -90,8 +90,17 @@ return array(
 		),
 		// theme params
 		'theme' => array(
-			'body_classes' => 'page-boxed page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-closed-hide-logo',
+			'body_classes' => array(
+				'page-boxed', 
+				'page-header-fixed', 
+				'page-sidebar-closed-hide-logo', 
+				'page-container-bg-solid', 
+				'page-sidebar-closed-hide-logo',
+			),
 			'logo_file' => '',
+			// 'sidebar_style' => 'default', // or compact
+			// 'sidebar_menu' => 'hover', // or accordion
+			// 'sidebar_position' => 'left', // or right
 		),
 	),
 );
