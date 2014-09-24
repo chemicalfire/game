@@ -372,6 +372,7 @@
 		<!-- BEGIN PAGE CONTAINER -->
 		<div class="page-container">
 			<!-- BEGIN SIDEBAR -->
+			<?php $this->widget('themes.metronic.widgets.SidebarMenu'); ?>
 			<div class="page-sidebar-wrapper">
 				<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing-->
 				<!-- DOC: Change data-auto-spped="200" to adjust the sub menu slide up/down speed -->
@@ -530,8 +531,10 @@
 						<div class="page-toolbar">
 							<div id="dashboard-report-range" class="tooltips btn btn-fit-height btn-sm green-haze btn-dashboard-daterange" data-container="body" data-placement="left" data-original-title="Change dashboard date range">
 								<i class="icon-calendar"></i>
+								<!--
 								&nbsp;&nbsp;
 								<i class="fa fa-angle-down"></i>
+								-->
 								&nbsp;&nbsp;
 								<span class="thin uppercase visible-lg-inline-block"></span>&nbsp;<i class="fa fa-angle-down"></i>
 							</div>

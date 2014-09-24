@@ -13,11 +13,15 @@ return array(
 
 	// preloading 'log' component
 	'preload'=>array('log'),
+	'aliases' => array(
+		'themes' => dirname(__FILE__) . '/../../themes',
+	),
 
 	// autoloading model and component classes
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'themes.*',
 	),
 
 	'modules'=>array(
