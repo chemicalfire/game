@@ -372,57 +372,18 @@
 		<!-- BEGIN PAGE CONTAINER -->
 		<div class="page-container">
 			<!-- BEGIN SIDEBAR -->
-			<?php $this->widget('themes.metronic.widgets.SidebarMenu'); ?>
-			<div class="page-sidebar-wrapper">
-				<!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing-->
-				<!-- DOC: Change data-auto-spped="200" to adjust the sub menu slide up/down speed -->
-				<div class="page-sidebar navbar-collapse collapse">
-					<!-- BEGIN SIDEBAR MENU -->
-					<ul class="page-sidebar-menu page-sidebar-menu-hover-submenu" data-auto-scroll="true" data-slide-speed="200">
-						<li class="start active">
-							<a href="#">
-								<i class="icon-home"></i>
-								<span class="title">Dashboard</span>
-								<span class="selected"></span>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:;">
-								<i class="icon-folder"></i>
-								<span class="title">Multi Level Menu</span>
-								<span class="arrow"></span>
-							</a>
-							<ul class="sub-menu">
-								<li>
-									<a href="javascript:;">
-										<i class="icon-settings"></i> Item 1 <span class="arrow"></span>
-									</a>
-									<ul class="sub-menu">
-										<li>
-											<a href="javascript:;">
-												<i class="icon-user"></i> Smaple Link 1 <span class="arrow"></span>
-											</a>
-											<ul class="sub-menu">
-												<li>
-													<a href="#">
-														<i class="icon-power"></i> Sample Link 1
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<i class="icon-paper-plane"></i> Sample Link 2
-													</a>
-												</li>
-											</ul>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-					</ul>
-					<!-- END SIDEBAR MENU -->
-				</div>
-			</div>
+			<?php $this->widget('themes.metronic.widgets.SidebarMenu', array(
+				'items' => array(
+					array('icon' => 'home', 'title' => 'Dashboard', 'url' => array('/home/index')),
+					array('icon' => 'folder', 'title' => 'Multi Level Menu', 'items' => array(
+						array('icon' => 'settings', 'title' => 'Item 1', 'items' => array(
+							array('icon' => 'user', 'title' => 'Sample Link 1', 'items' => array(
+								array('icon' => 'home', 'title' => 'Dashboard', 'url' => array('/home/aaa')),
+							),),
+						),),
+					),),
+				),
+			)); ?>
 			<!-- END SIDEBAR -->
 			<!-- BEGIN CONTENT -->
 			<div class="page-content-wrapper">
