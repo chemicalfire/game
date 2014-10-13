@@ -8,7 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'My Web Application',
-	'defaultController' => 'home', // set default controller to HomeController
+	'defaultController' => 'home/index', // set default controller to HomeController
 	'theme' => 'metronic',
 
 	// preloading 'log' component
@@ -105,6 +105,16 @@ return array(
 			// 'sidebar_style' => 'default', // or compact
 			// 'sidebar_menu' => 'hover', // or accordion
 			// 'sidebar_position' => 'left', // or right
+            'sidebar_menu_items' => array(
+                array('icon' => 'home', 'title' => 'Dashboard', 'url' => array('/home/index')),
+                array('icon' => 'folder', 'title' => 'Multi Level Menu', 'items' => array(
+                    array('icon' => 'settings', 'title' => 'Item 1', 'items' => array(
+                        array('icon' => 'user', 'title' => 'Sample Link 1', 'items' => array(
+                            array('icon' => 'home', 'title' => 'Dashboard', 'url' => array('/home/aaa')),
+                        ),),
+                    ),),
+                ),),
+            ),
 		),
 	),
 );

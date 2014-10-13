@@ -24,7 +24,22 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css">
 	<!-- END PAGE LEVEL PLUGIN STYLE -->
 	<!-- BEGIN PAGE LEVEL STYLES -->
-
+    <?php
+    if (!empty($this->pageLevelStyles)) {
+        foreach ($this->pageLevelStyles as $style) {
+            echo '<link rel="stylesheet" type="text/css" href="' . $style['link'] . '"';
+            unset($style['link']);
+            if (!empty($style)) {
+                $attrs = array();
+                foreach ($style as $key => $value) {
+                    $attrs[] = $key . '="' . $value . '"';
+                }
+                echo implode(' ', $attrs);
+            }
+            echo '>';
+        }
+    }
+    ?>
 	<!-- END PAGE LEVEL STYLES -->
 	<!-- BEGIN THEME STYLES -->
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/css/components.css">
@@ -56,6 +71,7 @@
 			<!-- BEGIN PAGE ACTIONS -->
 			<!-- DOC: Remove "hide" class to enable the page header actions -->
 			<!-- /* Widget::pageActions -->
+            <?php /*
 			<div class="page-actions">
 				<div class="btn-group">
 					<button type="button" class="btn btn-circle red-pink dropdown-toggle" data-toggle="dropdown">
@@ -122,6 +138,7 @@
 					</ul>
 				</div>
 			</div>
+            */?>
 			<!-- Widget::pageActions */ -->
 			<!-- END PAGE ACTIONS -->
 			<!-- BEGIN PAGE TOP -->
@@ -141,6 +158,7 @@
 				<div class="top-menu">
 					<ul class="nav navbar-nav pull-right">
 						<!-- BEGIN NOTIFICATION DROPDOWN -->
+                        <?php /*
 						<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 								<i class="icon-bell"></i>
@@ -233,8 +251,11 @@
 								</li>
 							</ul>
 						</li>
-						<!-- END NOTIFICATION DROPDOWN -->
+
+                        */?>
+                        <!-- END NOTIFICATION DROPDOWN -->
 						<!-- BEGIN INBOX DROPDOWN -->
+                        <?php /*
 						<li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 								<i class="icon-envelope-open"></i>
@@ -271,8 +292,10 @@
 								</li>
 							</ul>
 						</li>
+                        */?>
 						<!-- END INBOX DROPDOWN -->
 						<!-- BEGIN TODO DROPDOWN -->
+                        <?php /*
 						<li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 								<i class="icon-calendar"></i>
@@ -306,6 +329,7 @@
 								</li>
 							</ul>
 						</li>
+                        */?>
 						<!-- END TODO DROPDOWN -->
 						<!-- BEGIN QUICK SIDEBAR TOGGLER -->
 						<!--
@@ -317,6 +341,7 @@
 						-->
 						<!-- END QUICK SIDEBAR TOGGLER -->
 						<!-- BEGIN USER LOGIN DROPDOWN -->
+                        <?php /*
 						<li class="dropdown dropdown-user">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 								<img src="" alt="" class="img-circle">
@@ -357,6 +382,7 @@
 								</li>
 							</ul>
 						</li>
+                        */?>
 						<!-- END USER LOGIN DROPDOWN -->
 					</ul>
 				</div>
@@ -372,18 +398,7 @@
 		<!-- BEGIN PAGE CONTAINER -->
 		<div class="page-container">
 			<!-- BEGIN SIDEBAR -->
-			<?php $this->widget('themes.metronic.widgets.SidebarMenu', array(
-				'items' => array(
-					array('icon' => 'home', 'title' => 'Dashboard', 'url' => array('/home/index')),
-					array('icon' => 'folder', 'title' => 'Multi Level Menu', 'items' => array(
-						array('icon' => 'settings', 'title' => 'Item 1', 'items' => array(
-							array('icon' => 'user', 'title' => 'Sample Link 1', 'items' => array(
-								array('icon' => 'home', 'title' => 'Dashboard', 'url' => array('/home/aaa')),
-							),),
-						),),
-					),),
-				),
-			)); ?>
+			<?php $this->widget('themes.metronic.widgets.SidebarMenu', array('items' => Yii::app()->getParams()->theme['sidebar_menu_items'],)); ?>
 			<!-- END SIDEBAR -->
 			<!-- BEGIN CONTENT -->
 			<div class="page-content-wrapper">
@@ -406,7 +421,8 @@
 					</div>
 					<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM -->
 					<!-- BEGIN STYLE CUSTOMIZER -->
-					<!--<div class="theme-panel">
+					<?php /*
+                    div class="theme-panel">
 						<div class="toggler tooltips" data-container="body" data-placement="left" data-html="true" data-original-title="Click to open advance theme customizer panel">
 							<i class="icon-settings"></i>
 						</div>
@@ -474,21 +490,18 @@
 								</select>
 							</div>
 						</div>
-					</div>-->
+					</div>
+                    */?>
 					<!-- END STYLE CUSTOMIZER -->
 					<!-- BEGIN PAGE HEADER -->
-					<h3 class="page-title">Dashboard</h3>
+					<h3 class="page-title"><?php echo CHtml::encode($this->pageTitle); ?></h3>
 					<div class="page-bar">
 						<ul class="page-breadcrumb">
-							<li>
-								<i class="fa fa-home"></i>
-								<a href="<?php echo Yii::app()->baseUrl; ?>"></a>
-								<i class="fa fa-angle-right"></i>
-							</li>
-							<li>
-								<a href="#">Dashborad</a>
-							</li>
+                            <!-- /* Widget::Breadcrumb -->
+                            <?php $this->widget('themes.metronic.widgets.Breadcrumb', array('items' => $this->breadcrumbs));?>
+                            <!-- */ -->
 						</ul>
+                        <?php /*
 						<div class="page-toolbar">
 							<div id="dashboard-report-range" class="tooltips btn btn-fit-height btn-sm green-haze btn-dashboard-daterange" data-container="body" data-placement="left" data-original-title="Change dashboard date range">
 								<i class="icon-calendar"></i>
@@ -500,12 +513,11 @@
 								<span class="thin uppercase visible-lg-inline-block"></span>&nbsp;<i class="fa fa-angle-down"></i>
 							</div>
 						</div>
+                        */?>
 					</div>
 					<!-- END PAGE HEADER -->
 					<!-- BEGIN MAIN CONTENT -->
-					<div id="main-content">
-						<?php echo $content; ?>
-					</div>
+					<?php echo $content; ?>
 					<!-- END MAIN CONTENT -->
 				</div>
 			</div>
@@ -536,6 +548,13 @@
 	<!-- BEGIN PAGE LEVEL PLUGINS -->
 	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap-daterangepicker/moment.min.js"></script>
 	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <?php
+        if (!empty($this->pageLevelPlugins)) {
+            foreach ($this->pageLevelPlugins as $plugin) {
+                echo '<script type="' . ((isset($plugin['type']) && !empty($plugin['type'])) ? $plugin['type'] : 'text/javascript') . '" src="' . $plugin['link'] . '"></script>';
+            }
+        }
+    ?>
 	<!-- END PAGE LEVEL PLUGINS -->
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
 	<script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/scripts/metronic.js"></script>
@@ -547,6 +566,7 @@
 		Metronic.setGlobalImgPath('<?php echo Yii::app()->baseUrl; ?>/themes/assets/global/img/');
 		Metronic.init();
 		Layout.init();
+        <?php /*
 		$('#dashboard-report-range').daterangepicker({
 		        opens: (Metronic.isRTL() ? 'right' : 'left'),
 		        startDate: moment().subtract(29, 'days'),
@@ -590,7 +610,15 @@
 		);
 		$('#dashboard-report-range span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
 		$('#dashboard-report-range').show();
+        */?>
 	});
+    <?php
+        if (!empty($this->pageLevelScripts)) {
+            foreach ($this->pageLevelScripts as $script) {
+                echo $script;
+            }
+        }
+    ?>
 	</script>
 	<!-- END JAVASCRIPTS -->
 	<script type="text/javascript">

@@ -18,7 +18,6 @@ class SidebarMenu extends CWidget
 		$this->items = $this->normalizeItems($this->items, $route, $hasActiveChild);
 	}
 
-
 	public function run() 
 	{
 		return $this->renderMenu($this->items);
