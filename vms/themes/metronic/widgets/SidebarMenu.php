@@ -69,7 +69,11 @@ HTML;
 				$options['class'] = implode(' ', $class);
 			}
 			echo CHtml::openTag('li', $options);
-			echo $this->renderMenuItem($item);
+            if (isset($item['items']) && count($item['items'])) {
+                echo $this->renderMenuItem($item);
+            } else {
+                echo $this->renderMenuItemNoneChildren($item);
+            }
 			if (isset($item['items']) && count($item['items'])) {
 				echo CHtml::openTag('ul', array('class' => 'sub-menu'));
 				$this->renderMenuRecursive($item['items']);
@@ -78,6 +82,25 @@ HTML;
 			echo CHtml::closeTag('li');
 		}
 	}
+
+
+    protected function renderMenuItemNoneChildren($item)
+    {
+        if (isset($item['url'])) {
+            $url = CHtml::normalizeUrl($item['url']);
+        } else {
+            $url = "javascript:;";
+        }
+        echo '<a href="' . $url . '">';
+        if (isset($item['icon']) && !empty($item['icon'])) {
+            echo '<i class="icon-' . $item['icon'] . '"></i>';
+        }
+        echo '<span class="title">' . $item['title'] . '</span>';
+        if ($item['active']) {
+            echo '<span class="selected"></span>';
+        }
+        echo '</a>';
+    }
 
 
 	protected function renderMenuItem($item) 
