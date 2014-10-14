@@ -20,16 +20,10 @@ function pre($var, $exit = true)
 $basePath = dirname(__FILE__);
 
 return array(
-    // 版本管理控制
-    'vms' => array(
-        'installation' => 'local', // 非本机安装则为remote, 如果是remote安装，则不需要以下的配置
-        'path' => $basePath . '/../vms',
-    ),
-    // 其他配置信息
-    'dev_path' => $basePath . '/dev', // 开发路径
-    'test_path' => $basePath . '/test', // 测试路径
-    // dev和test环境需要认证
-    'dev_auth' => '123456',
-    'test_auth' => '654321',
-
+    'code_base_path' => $basePath, // 代码根目录
+    'auth' => '123456', // dev和test环境需要认证
+    'config_base_path' => $basePath . '/../config', // 配置文件根目录
+    'log_base_path' => $basePath . '/../log', // 日志文件根目录
+    'entry_file' => 'index.php', // 项目的入口文件
+    'default_version' => 'dev', // 默认的版本
 );

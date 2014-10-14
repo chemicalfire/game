@@ -1,0 +1,13 @@
+{
+    "name" : "game/backend",
+    "description" : "A game engine light framework",
+    "type" : "engine-core",
+    "license" : "GPL-2.0+",
+    "require" : {},
+    "autoload" : {},
+    "config" : {
+        "vendor-dir" : "vendor",
+        "preferred-install" : "dist",
+        "autoloader-suffix" : "GameEngine"
+    }
+}
