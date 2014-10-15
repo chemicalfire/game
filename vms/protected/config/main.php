@@ -1,5 +1,19 @@
 <?php
-
+if (!function_exists('pre')) {
+    // 定义一个简单的打印函数
+    function pre($var, $exit = true)
+    {
+        if (is_bool($var) || is_numeric($var) || is_string($var)) {
+            $output = var_export($var, true);
+        } else {
+            $output = print_r($var, true);
+        }
+        echo '<pre>', $output, '</pre>';
+        if ($exit) {
+            exit();
+        }
+    }
+}
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
@@ -25,15 +39,15 @@ return array(
 	),
 
 	'modules'=>array(
-		// uncomment the following to enable the Gii tool
-		/*
-		'gii'=>array(
-			'class'=>'system.gii.GiiModule',
-			'password'=>'Enter Your Password Here',
-			// If removed, Gii defaults to localhost only. Edit carefully to taste.
-			'ipFilters'=>array('127.0.0.1','::1'),
-		),
-		*/
+        // uncomment the following to enable the Gii tool
+        /*
+        'gii'=>array(
+            'class'=>'system.gii.GiiModule',
+            'password'=>'Enter Your Password Here',
+            // If removed, Gii defaults to localhost only. Edit carefully to taste.
+            'ipFilters'=>array('127.0.0.1','::1'),
+        ),
+        */
 	),
 
 	// application components
@@ -41,10 +55,15 @@ return array(
 
 		'user'=>array(
 			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
+			'allowAutoLogin'=>false,
+            'class' => 'VmsUser',
+            'loginUrl' => array('user/login'),
 		),
 
-		// uncomment the following to enable URLs in path-format
+        // uncomment the following to enable URLs in path-format
+        'urlManager'=>array(
+            'baseUrl'=>'vms.php',
+        ),
 		/*
 		'urlManager'=>array(
 			'urlFormat'=>'path',
@@ -58,6 +77,7 @@ return array(
 
 		// database settings are configured in database.php
 		'db'=>require(dirname(__FILE__).'/database.php'),
+        'redis' => require(dirname(__FILE__) . '/redis.php'),
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors

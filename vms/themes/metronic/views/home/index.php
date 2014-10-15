@@ -2,7 +2,7 @@
 /* @var $this HomeController */
 
 $this->pageTitle=Yii::app()->name;
-$this->breadcrumbs[] = array('title' => $this->pageTitle, 'link' => Yii::app()->baseUrl,);
+$this->breadcrumbs[] = array('title' => $this->pageTitle, 'link' => array('home/index'),);
 ?>
 
 <h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>

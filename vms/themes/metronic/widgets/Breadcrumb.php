@@ -17,7 +17,7 @@ class BreadCrumb extends CWidget
     {
         parent::run();
         echo '<li>';
-        echo '<i class="fa fa-home"></i><a href="' . Yii::app()->baseUrl . '"></a>';
+        echo '<i class="fa fa-home"></i>';
         if (!empty($this->breadcrumbs)) {
             echo '<i class="fa fa-angle-right"></i>';
         }
@@ -45,7 +45,7 @@ class BreadCrumb extends CWidget
                     $html .= '<i class="fa fa-' . $breadcrumb['icon'] . '"></i>';
                 }
                 if (isset($breadcrumb['link']) && !empty($breadcrumb['link'])) {
-                    $html.= '<a href="' . $breadcrumb['link'] . '">';
+                    $html.= '<a href="' . CHtml::normalizeUrl($breadcrumb['link']) . '">';
                 } else {
                     $html .= '<a href="javascript:;">';
                 }

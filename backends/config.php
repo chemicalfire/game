@@ -3,17 +3,19 @@
  * 应用外层配置文件
  */
 
-// 定义一个简单的打印函数
-function pre($var, $exit = true)
-{
-    if (is_bool($var) || is_numeric($var) || is_string($var)) {
-        $output = var_export($var, true);
-    } else {
-        $output = print_r($var, true);
-    }
-    echo '<pre>', $output, '</pre>';
-    if ($exit) {
-        exit();
+if (!function_exists('pre')) {
+    // 定义一个简单的打印函数
+    function pre($var, $exit = true)
+    {
+        if (is_bool($var) || is_numeric($var) || is_string($var)) {
+            $output = var_export($var, true);
+        } else {
+            $output = print_r($var, true);
+        }
+        echo '<pre>', $output, '</pre>';
+        if ($exit) {
+            exit();
+        }
     }
 }
 
