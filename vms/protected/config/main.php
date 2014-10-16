@@ -56,7 +56,7 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>false,
-            'class' => 'VmsUser',
+            // 'class' => 'VmsUser',
             'loginUrl' => array('user/login'),
 		),
 

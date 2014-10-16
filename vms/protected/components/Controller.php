@@ -32,9 +32,14 @@ class Controller extends CController
     public $pageLevelPlugins = array();
 
     /**
-     * @var array context page-level script contents
+     * @var array context page-level script links
      */
     public $pageLevelScripts = array();
+
+    /**
+     * @var array context page scripts contents
+     */
+    public $pageScripts = array();
 
     /**
      * @var array context page-level body classes

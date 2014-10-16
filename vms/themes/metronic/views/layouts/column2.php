@@ -305,14 +305,14 @@ $this->pageLevelBodyClasses += Yii::app()->getParams()->theme['body_classes'];
 -->
 <!-- END QUICK SIDEBAR TOGGLER -->
 <!-- BEGIN USER LOGIN DROPDOWN -->
-<?php /*
                     <li class="dropdown dropdown-user">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <img src="" alt="" class="img-circle">
-                            <span class="username username-hide-on-mobile"> Bob </span>
+                            <span class="username username-hide-on-mobile"> <?php echo Yii::app()->user->name;?> </span>
                             <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
+                            <!--
                             <li>
                                 <a href="#">
                                     <i class="icon-user"></i> My Profile
@@ -339,14 +339,14 @@ $this->pageLevelBodyClasses += Yii::app()->getParams()->theme['body_classes'];
                                     <i class="icon-lock"></i> Lock Screen
                                 </a>
                             </li>
+                            -->
                             <li>
-                                <a href="#">
+                                <a href="<?php echo CHtml::normalizeUrl(array('user/logout'));?>">
                                     <i class="icon-key"></i> Log Out
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    */?>
 <!-- END USER LOGIN DROPDOWN -->
 </ul>
 </div>
@@ -525,6 +525,13 @@ if (!empty($this->pageLevelPlugins)) {
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/scripts/metronic.js"></script>
 <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/admin/layout/scripts/layout.js"></script>
+<?php
+if (!empty($this->pageLevelScripts)) {
+    foreach ($this->pageLevelScripts as $script) {
+        echo '<script type="' . ((isset($script['type']) && !empty($script['type'])) ? $script['type'] : 'text/javascript') . '" src="' . $script['link'] . '"></script>';
+    }
+}
+?>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script type="text/javascript">
     jQuery(document).ready(function() {
@@ -579,8 +586,8 @@ if (!empty($this->pageLevelPlugins)) {
         */?>
     });
     <?php
-        if (!empty($this->pageLevelScripts)) {
-            foreach ($this->pageLevelScripts as $script) {
+        if (!empty($this->pageScripts)) {
+            foreach ($this->pageScripts as $script) {
                 echo $script;
             }
         }

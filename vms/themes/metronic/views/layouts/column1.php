@@ -17,16 +17,23 @@
     <!-- END CORE PLUGINS -->
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <?php
-    if (!empty($this->pageLevelPlugins)) {
-        foreach ($this->pageLevelPlugins as $plugin) {
-            echo '<script type="' . ((isset($plugin['type']) && !empty($plugin['type'])) ? $plugin['type'] : 'text/javascript') . '" src="' . $plugin['link'] . '"></script>';
+        if (!empty($this->pageLevelPlugins)) {
+            foreach ($this->pageLevelPlugins as $plugin) {
+                echo '<script type="' . ((isset($plugin['type']) && !empty($plugin['type'])) ? $plugin['type'] : 'text/javascript') . '" src="' . $plugin['link'] . '"></script>';
+            }
         }
-    }
     ?>
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/global/scripts/metronic.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->baseUrl; ?>/themes/metronic/assets/admin/layout/scripts/layout.js"></script>
+    <?php
+    if (!empty($this->pageLevelScripts)) {
+        foreach ($this->pageLevelScripts as $script) {
+            echo '<script type="' . ((isset($script['type']) && !empty($script['type'])) ? $script['type'] : 'text/javascript') . '" src="' . $script['link'] . '"></script>';
+        }
+    }
+    ?>
     <!-- END PAGE LEVEL SCRIPTS -->
     <script type="text/javascript">
         jQuery(document).ready(function() {
@@ -34,55 +41,10 @@
             Metronic.setGlobalImgPath('<?php echo Yii::app()->baseUrl; ?>/themes/assets/global/img/');
             Metronic.init();
             Layout.init();
-            <?php /*
-            $('#dashboard-report-range').daterangepicker({
-                    opens: (Metronic.isRTL() ? 'right' : 'left'),
-                    startDate: moment().subtract(29, 'days'),
-                    endDate: moment(),
-                    minDate: '01/01/2012',
-                    maxDate: '12/31/2014',
-                    dateLimit: {
-                        days: 60
-                    },
-                    showDropdowns: false,
-                    showWeekNumbers: true,
-                    timePicker: false,
-                    timePickerIncrement: 1,
-                    timePicker12Hour: true,
-                    ranges: {
-                        'Today': [moment(), moment()],
-                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                        'This Month': [moment().startOf('month'), moment().endOf('month')],
-                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                    },
-                    buttonClasses: ['btn btn-sm'],
-                    applyClass: ' blue',
-                    cancelClass: 'default',
-                    format: 'MM/DD/YYYY',
-                    separator: ' to ',
-                    locale: {
-                        applyLabel: 'Apply',
-                        fromLabel: 'From',
-                        toLabel: 'To',
-                        customRangeLabel: 'Custom Range',
-                        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-                        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                        firstDay: 1
-                    }
-                },
-                function (start, end) {
-                    $('#dashboard-report-range span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                }
-            );
-            $('#dashboard-report-range span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-            $('#dashboard-report-range').show();
-            */?>
         });
         <?php
-            if (!empty($this->pageLevelScripts)) {
-                foreach ($this->pageLevelScripts as $script) {
+            if (!empty($this->pageScripts)) {
+                foreach ($this->pageScripts as $script) {
                     echo $script;
                 }
             }
