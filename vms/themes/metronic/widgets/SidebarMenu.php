@@ -115,7 +115,7 @@ HTML;
 		}
 		echo '<span class="title">' . $item['title'] . '</span>';
 		if ($item['active']) {
-			echo '<span class="selected"></span>';
+			echo '<span class="selected"></span><span class="arrow open"></span>';
 		} else {
 			echo '<span class="arrow"></span>';
 		}

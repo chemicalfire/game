@@ -3,6 +3,7 @@ if (!function_exists('pre')) {
     // 定义一个简单的打印函数
     function pre($var, $exit = true)
     {
+        header("Content-type:text/html;charset=utf-8");
         if (is_bool($var) || is_numeric($var) || is_string($var)) {
             $output = var_export($var, true);
         } else {
@@ -14,6 +15,8 @@ if (!function_exists('pre')) {
         }
     }
 }
+
+$appConfig = require_once dirname(__FILE__) . '/../../config.php';
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
@@ -21,7 +24,7 @@ if (!function_exists('pre')) {
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'"'. $appConfig['game'] . '"版本控制系统',
 	'defaultController' => 'home/index', // set default controller to HomeController
 	'theme' => 'metronic',
 
@@ -55,7 +58,7 @@ return array(
 
 		'user'=>array(
 			// enable cookie-based authentication
-			'allowAutoLogin'=>false,
+			'allowAutoLogin'=>true,
             // 'class' => 'VmsUser',
             'loginUrl' => array('user/login'),
 		),
@@ -108,10 +111,7 @@ return array(
 	'params' => array(
 		// this is used in contact page
 		'adminEmail' => 'llw.liuliwu@gmail.com',
-		// vms developers
-		'developers' => array(
-			array('name' => 'liuliwu', 'email' => 'llw.liuliwu@gmail.com'),
-		),
+        'app_config' => $appConfig,
 		// theme params
 		'theme' => array(
 			'body_classes' => array(
@@ -126,7 +126,12 @@ return array(
 			// 'sidebar_menu' => 'hover', // or accordion
 			// 'sidebar_position' => 'left', // or right
             'sidebar_menu_items' => array(
-                array('icon' => 'home', 'title' => 'Dashboard', 'url' => array('/home/index')),
+                array('icon' => 'home', 'title' => '首页', 'url' => array('/home/index')),
+                array('icon' => 'folder', 'title' => '版本管理', 'items' => array(
+                    array('icon' => 'docs', 'title' => '历史版本', 'url' => array('/version/list')),
+                    array('icon' => 'doc', 'title' => '发布版本', 'url' => array('/version/create')),
+                )),
+                /*
                 array('icon' => 'folder', 'title' => 'Multi Level Menu', 'items' => array(
                     array('icon' => 'settings', 'title' => 'Item 1', 'items' => array(
                         array('icon' => 'user', 'title' => 'Sample Link 1', 'items' => array(
@@ -134,6 +139,7 @@ return array(
                         ),),
                     ),),
                 ),),
+                */
             ),
 		),
 	),

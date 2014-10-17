@@ -72,4 +72,14 @@ class Controller extends CController
         );
     }
 
+
+    public function getAppConfig($key = null)
+    {
+        $appConfig = Yii::app()->getParams()->app_config;
+        if (!empty($key)) {
+            return isset($appConfig[$key]) ? $appConfig[$key] : null;
+        }
+        return $appConfig;
+    }
+
 }
