@@ -21,10 +21,43 @@ $this->breadcrumbs[] = array('title' => '发布版本', 'link' => array('version
                         <div class="form-group">
                             <label class="col-md-3 control-label">版本编号</label>
                             <div class="col-md-5">
-                                <input type="text" class="form-control" placeholder="0.0.0">
+                                <input type="text" class="form-control" placeholder="0.0.0" name="version[code]" value="<?php echo isset($_POST['version']['code']) ? $_POST['version']['code'] : null; ?>">
                             </div>
                             <div class="col-md-4">
                                 <span class="help-block">展示给用户的版本号</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">版本日志</label>
+                            <div class="col-md-5">
+                                <textarea style="resize: none;" class="form-control" placeholder="..." name="version[log]"><?php echo isset($_POST['version']['log']) ? $_POST['version']['log'] : null; ?></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">前端版本</label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" placeholder="0.0.0" name="version[modules][frontend]" value="<?php echo isset($_POST['version']['modules']['frontend']) ? $_POST['version']['modules']['frontend'] : null; ?>">
+                            </div>
+                            <div class="col-md-4">
+                                <span class="help-block">前端代码版本分支</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">后端版本</label>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" placeholder="0.0.0" name="version[modules][backend]" value="<?php echo isset($_POST['version']['modules']['backend']) ? $_POST['version']['modules']['backend'] : null ; ?>">
+                            </div>
+                            <div class="col-md-4">
+                                <span class="help-block">后端代码版本分支</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">脚本版本</label>
+                            <div class="col-md-5">
+                                <input class="form-control" type="text" placeholder="0.0.0" name="version[modules][script]" value="<?php echo isset($_POST['version']['modules']['script']) ? $_POST['version']['modules']['script'] : null; ?>">
+                            </div>
+                            <div class="col-md-4">
+                                <span class="help-block">脚本代码版本分支</span>
                             </div>
                         </div>
                     </div>
