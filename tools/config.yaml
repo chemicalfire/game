@@ -1,0 +1,7 @@
+#项目部署工具的配置文件
+
+#定义项目的英文名称，tool.py & tool.sh会根据这里定义的项目名称去读取项目的通用配置
+#例如，如果项目的英文名称为demo，项目的通用配置文件名为demo.common.yaml
+project_name : 'demo'
+#定义项目部署的根目录
+project_root : '/var/www/self/game/deploy'
