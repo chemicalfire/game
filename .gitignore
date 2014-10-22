@@ -1,2 +1,3 @@
 /vms/protected/runtime/*
 /vms/assets/*
+/deploy/svn/config/.svn/*
