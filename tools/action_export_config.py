@@ -104,6 +104,25 @@ def dictKeyCmp(k1, k2) :
         return cmp(int(k1), int(k2))
     return cmp(k1, k2)
 
+# 定义一个将python字典转换成lua的字典格式
+def pyDictToLuaDict(pyDict) :
+    lua_string = '{'
+    for k, v in pyDict.items() :
+        key = "['" + str(k) + "']"
+        if type(v) == dict :
+            value = pyDictToLuaDict(v)
+        elif type(v) == int or type(v) == float :
+            value = str(v)
+        elif type(v) == str or type(v) == unicode :
+            value = v.replace("'", "\\'")
+            value = "'" + value + "'"
+        else :
+            logging.warning("未知的类型 %s"%type(v))
+        line = key + "=" + value + ","
+        lua_string = lua_string + line
+    lua_string = lua_string + "}"
+    return lua_string
+
 # 定义一个将python字典转换成php的array格式
 def pyDictToPhpArray(key, value, indent) :
     prefix = '    ' * indent
@@ -148,7 +167,7 @@ def getLuaScriptName(filename) :
 
 
 # 定义执行导出配置的函数
-def exportConfig(input_dir,output_dir,php_config_package_dir,ignore_dirs) :
+def exportConfig(input_dir, output_dirs, php_config_package_dir, ignore_dirs) :
     list = os.listdir(input_dir)
     for i in list :
         path = os.path.join(input_dir, i)
@@ -156,7 +175,7 @@ def exportConfig(input_dir,output_dir,php_config_package_dir,ignore_dirs) :
             pathbasename = os.path.basename(path)
             if pathbasename in ignore_dirs :
                 continue
-            exportConfig(input_dir, output_dir, php_config_package_dir, ignore_dirs)
+            exportConfig(input_dir, output_dirs, php_config_package_dir, ignore_dirs)
         elif os.path.isfile(path) :
             filebasename = os.path.basename(path)
             fileinfos = os.path.splitext(filebasename)
@@ -171,7 +190,7 @@ def exportConfig(input_dir,output_dir,php_config_package_dir,ignore_dirs) :
                 os.mkdirs(php_config_package_path)
 
             if fileext == '.csv' :
-                output_file_name = output_dir + os.sep + filename + '.json'
+                output_file_name = output_dirs['json'] + os.sep + filename + '.json'
                 input_file_name = path
                 try :
                     # 生成json格式的文件
@@ -184,11 +203,16 @@ def exportConfig(input_dir,output_dir,php_config_package_dir,ignore_dirs) :
                 php_config_file_name = os.path.join(php_config_package_path, filename + '.php')
                 open(php_config_file_name, 'w').write("<?php\nreturn " + pyDictToPhpArray(None, configDict, 0))
                 # logging.debug("生成PHP的配置文件%s于目录%s下"%(filename + '.php', php_config_package_path))
+                # 生成lua格式的文件
+                output_file_name = output_dirs['lua'] + os.sep + filename + '.lua'
+                lua_extends = """
+if GameConfig ~= nil and GameConfig.addSingleConfig ~= nil then
+    GameConfig:addSingleConfig('%s',cfg)
+end
+return cfg"""
+                open(output_file_name, 'w').write("local cfg=%s\n%s"%(pyDictToLuaDict(configDict), lua_extends))
+                logging.debug("将csv格式的文件 %s 导出为lua 格式的文件 %s"%(path, output_file_name))
 
-
-# 定义生成lua脚本的函数
-def exportLua() :
-    print 'export lua script config'
 
 
 # 定义运行方法
@@ -199,7 +223,7 @@ def run(config) :
     outputConfigBaseDir = projectRoot + os.sep + config['config_output_path']
     jsonOutputConfigDir = outputConfigBaseDir + os.sep + getConfig(config, 'config_output_format.json')
     luaOutputConfigDir = outputConfigBaseDir + os.sep + getConfig(config, 'config_output_format.lua')
-
+    outputDirs = {'json' : jsonOutputConfigDir, 'lua' : luaOutputConfigDir}
     projectName = config['project_name']
 
     jsonFileExtName = 'json'
@@ -227,6 +251,6 @@ def run(config) :
 
     # 开始转换输入路径下的csv文件到对应的输出路径
     # 需要输出json，php，lua格式的文件
-    exportConfig(inputConfigDir, jsonOutputConfigDir, phpConfigPackagePath, ignoreDirList)
+    exportConfig(inputConfigDir, outputDirs, phpConfigPackagePath, ignoreDirList)
 
 

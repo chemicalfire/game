@@ -1,0 +1,6 @@
+local cfg={['1']={['phsical_grow']=2.0,['dodge_grow']=10.0,['hit_init']=100.0,['agility_grow']=2.0,['hp_init']=300.0,['intellect_grow']=1.0,['agility_init']=20.0,['dodge_init']=100.0,['recover_mp_init']=5.0,['hit_grow']=10.0,['career_id']=1,['recover_mp_hit']=0.0,['physical_init']=25.0,['power_init']=30.0,['intellect_init']=10.0,['power_grow']=4.0,['hp_grow']=30.0,['mp_grow']=3.0,['mp_init']=100.0,['career_name']='剑士',},['3']={['phsical_grow']=2.0,['dodge_grow']=12.0,['hit_init']=80.0,['agility_grow']=4.0,['hp_init']=250.0,['intellect_grow']=1.0,['agility_init']=30.0,['dodge_init']=120.0,['recover_mp_init']=5.0,['hit_grow']=8.0,['career_id']=3,['recover_mp_hit']=0.0,['physical_init']=20.0,['power_init']=20.0,['intellect_init']=15.0,['power_grow']=2.0,['hp_grow']=25.0,['mp_grow']=4.0,['mp_init']=115.0,['career_name']='弓箭手',},['2']={['phsical_grow']=1.0,['dodge_grow']=11.0,['hit_init']=90.0,['agility_grow']=2.0,['hp_init']=200.0,['intellect_grow']=5.0,['agility_init']=20.0,['dodge_init']=110.0,['recover_mp_init']=5.0,['hit_grow']=9.0,['career_id']=2,['recover_mp_hit']=0.0,['physical_init']=15.0,['power_init']=15.0,['intellect_init']=35.0,['power_grow']=1.0,['hp_grow']=20.0,['mp_grow']=5.0,['mp_init']=130.0,['career_name']='魔法师',},}
+
+if GameConfig ~= nil and GameConfig.addSingleConfig ~= nil then
+    GameConfig:addSingleConfig('%s',cfg)
+end
+return cfg
