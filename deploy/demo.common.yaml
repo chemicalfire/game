@@ -1,0 +1,21 @@
+#项目的通用配置文件
+
+#定义配置文件读取目录
+#配置文件目录所直接放在deploy目录下的
+config_input_path : 'svn/config' #放在svn目录下所因为这是策划提交的excel或者csv文件
+config_output_path : 'svn/Resources' #放在svn目录下是因为生成的东西可以直接给前端开发使用
+
+config_input_format : 'csv' # 导入配置的文件格式
+config_output_format : # 导出配置格式相对应config_output_path下的目录
+  json : 'config' # json格式的配置文件对应svn/Resources/config
+  lua : 'script' # lua格式的配置文件对应svn/Resources/script
+
+#定义前段使用的小组件asset目录
+#该目录下的文件也是放在deploy目录下的
+asset_input_path : 'svn/asset'
+asset_output_path : 'svn/Resources/asset'
+
+
+# 定义包路径
+package_path :
+  php: '../config/dev'

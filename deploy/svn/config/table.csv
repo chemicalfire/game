@@ -1,0 +1,10 @@
+表英文名,表中文名
+tbl_en[string],tbl_cn[string]
+career,职业
+equip,装备
+equip_level,装备品阶
+equip_quality,装备品质
+guards,关卡
+monsters,怪物
+property,属性
+skill,技能

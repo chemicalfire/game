@@ -1,0 +1,5 @@
+职业ID,职业名称,力量初始值,敏捷初始值,体力初始值,智力初始值,生命值初始值,蓝初始值,命中初始值,闪避初始值,回蓝初始值,力量成长,敏捷成长,体力成长,智力成长,生命值成长,蓝成长值,命中成长,闪避成长,回蓝成长
+career_id[int],career_name[string],power_init[float],agility_init[float],physical_init[float],intellect_init[float],hp_init[float],mp_init[float],hit_init[float],dodge_init[float],recover_mp_init[float],power_grow[float],agility_grow[float],phsical_grow[float],intellect_grow[float],hp_grow[float],mp_grow[float],hit_grow[float],dodge_grow[float],recover_mp_hit[float]
+1,剑士,30,20,25,10,300,100,100,100,5,4,2,2,1,30,3,10,10,0
+2,魔法师,15,20,15,35,200,130,90,110,5,1,2,1,5,20,5,9,11,0
+3,弓箭手,20,30,20,15,250,115,80,120,5,2,4,2,1,25,4,8,12,0

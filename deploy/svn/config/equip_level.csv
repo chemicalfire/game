@@ -1,0 +1,6 @@
+装备阶（等级）,附加属性最小值,附加属性最大值
+equip_level[int],property_min_value[float],property_max_value[float]
+1,10,20
+2,20,30
+3,30,40
+4,40,50

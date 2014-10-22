@@ -1,8 +1,9 @@
 #coding=utf-8
-
+import os
+import sys
 import csv # 导入csv模块
-
-__all__ = ['csvFileToJsonFile']
+import json # 导入json模块
+from common import *
 
 # 定义一个检查json格式的函数
 def validJsonFormat(obj) :
@@ -61,10 +62,10 @@ def csvFileToJsonFile(input_file, output_file) :
 
         lineDict = {}
         pkIndex = 0
-        if len(row) == 0 or row == '' or row == None
+        if len(row) == 0 or row == '' or row == None :
             continue
 
-        for i in range(lan(row)) :
+        for i in range(len(row)) :
             if row[i] == '' or row[i] == None :
                 continue
 
@@ -88,13 +89,63 @@ def csvFileToJsonFile(input_file, output_file) :
     outHandler = open(output_file, 'w')
     # 检查json格式是否正确
     validJsonFormat(listDict)
-    jsonData = json,dumps(listDict, sort_keys = True) # json.dumps(listDict, sort_keys = True, indent = 2)
+    jsonData = json.dumps(listDict, sort_keys = True) # json.dumps(listDict, sort_keys = True, indent = 2)
     outHandler.truncate()
     outHandler.write(jsonData)
     outHandler.close()
     outputFileBasename = os.path.basename(output_file)
     logging.debug("将csv格式的文件 %s 导出为json格式的文件 %s"%(input_file, outputFileBasename))
     return listDict
+
+
+# 定义一个比较字典键 用来排序用的函数
+def dictKeyCmp(k1, k2) :
+    if type(k1) == str and type(k2) == str and k1.isdigit() and k2.isdigit() :
+        return cmp(int(k1), int(k2))
+    return cmp(k1, k2)
+
+# 定义一个将python字典转换成php的array格式
+def pyDictToPhpArray(key, value, indent) :
+    prefix = '    ' * indent
+    if indent > 0 :
+        suffix = ','
+    else :
+        suffix = ';'
+
+    code = ''
+
+    if key != None :
+        if type(key) == int :
+            key = str(key)
+        key = key.replace("'", "\\'")
+        code = code + prefix + "'" + key + "' => "
+
+    if type(value) == dict :
+        code = code + "array(\n"
+        for k in sorted(value.iterkeys(), dictKeyCmp) :
+            v = value[k]
+            code = code + pyDictToPhpArray(k, v, indent + 1) # 递归调用
+        code = code + prefix + ")" + suffix + "\n"
+    elif type(value) == list :
+        code = code + "array(\n"
+        for k in range(len(value)) :
+            v = value[k]
+            code = code + pyDictToPhpArray(k, v, indent + 1) # 递归调用
+        code = code + prefix + ")" + suffix + "\n"
+    elif type(value) == int or type(value) == float:
+        code = code + str(value) + suffix + "\n"
+    elif type(value) == str or type(value) == unicode :
+        value = value.replace("'", "\\'")
+        code = code + "'" + value + "'" + suffix + "\n"
+    else :
+        logging.warning("未知的类型 %s"%type(value))
+
+    return code
+
+# 定义一个获取lua脚本文件的文件名的函数
+def getLuaScriptName(filename) :
+    return filename[ 0 : filename.rindex('.lua') ].replace('/','.').replace('\\','.')
+
 
 # 定义执行导出配置的函数
 def exportConfig(input_dir,output_dir,php_config_package_dir,ignore_dirs) :
@@ -112,8 +163,32 @@ def exportConfig(input_dir,output_dir,php_config_package_dir,ignore_dirs) :
             filename = fileinfos[0]
             fileext = fileinfos[1]
 
+            relpath = os.path.relpath(input_dir, input_dir)
+            php_config_package_path = os.path.join(php_config_package_dir, relpath)
+            php_config_package_path = os.path.abspath(php_config_package_path)
+
+            if not os.path.exists(php_config_package_path) :
+                os.mkdirs(php_config_package_path)
+
+            if fileext == '.csv' :
+                output_file_name = output_dir + os.sep + filename + '.json'
+                input_file_name = path
+                try :
+                    # 生成json格式的文件
+                    configDict = csvFileToJsonFile(input_file_name, output_file_name)
+                except Exception, e :
+                    logging.error("配置文件%s内容有误"%(input_file_name))
+                    raise e
+
+                # 生成php格式的文件
+                php_config_file_name = os.path.join(php_config_package_path, filename + '.php')
+                open(php_config_file_name, 'w').write("<?php\nreturn " + pyDictToPhpArray(None, configDict, 0))
+                # logging.debug("生成PHP的配置文件%s于目录%s下"%(filename + '.php', php_config_package_path))
 
 
+# 定义生成lua脚本的函数
+def exportLua() :
+    print 'export lua script config'
 
 
 # 定义运行方法
@@ -121,23 +196,30 @@ def run(config) :
 
     projectRoot = config['project_root']
     inputConfigDir = projectRoot + os.sep + config['config_input_path']
-    outputConfigDir = projectRoot + os.sep + config['config_output_path']
+    outputConfigBaseDir = projectRoot + os.sep + config['config_output_path']
+    jsonOutputConfigDir = outputConfigBaseDir + os.sep + getConfig(config, 'config_output_format.json')
+    luaOutputConfigDir = outputConfigBaseDir + os.sep + getConfig(config, 'config_output_format.lua')
 
     projectName = config['project_name']
 
     jsonFileExtName = 'json'
 
-    phpConfigPackgePath = config['project_root'] + os.sep + getConfig(config, 'package_path.php')
+    phpConfigPackagePath = config['project_root'] + os.sep + getConfig(config, 'package_path.php')
 
     # 如果php配置包的路径不存在，则创建
     if not os.path.exists(phpConfigPackagePath) :
         os.mkdirs(phpConfigPackagePath)
 
     # 如果输出json格式文件的目录已经存在，需要递归地删除并重新创建其跟目录路径
-    if os.path.exists(outputConfigDir) :
-        delDirectoryRecursive(outputConfigDir)
-    if not os.path.exists(outputConfigDir)
-        os.makedirs(outputConfigDir)
+    if os.path.exists(jsonOutputConfigDir) :
+        delDirectoryRecursive(jsonOutputConfigDir)
+    if not os.path.exists(jsonOutputConfigDir) :
+        os.makedirs(jsonOutputConfigDir)
+
+    if os.path.exists(luaOutputConfigDir) :
+        delDirectoryRecursive(luaOutputConfigDir)
+    if not os.path.exists(luaOutputConfigDir) :
+        os.makedirs(luaOutputConfigDir)
 
     # 其中需要忽略的目录
     ignoreDirList = [] # 因为策划配置使用的基本上所svn，在目录中会出现.svn的目录，这样的目录所需要忽略的
@@ -145,6 +227,6 @@ def run(config) :
 
     # 开始转换输入路径下的csv文件到对应的输出路径
     # 需要输出json，php，lua格式的文件
-    exportConfig(inputConfigDir, outputConfigDir, phpConfigPackgePath, ignoreDirList)
+    exportConfig(inputConfigDir, jsonOutputConfigDir, phpConfigPackagePath, ignoreDirList)
 
 

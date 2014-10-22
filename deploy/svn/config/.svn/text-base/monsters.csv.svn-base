@@ -1,0 +1,7 @@
+怪物ID,怪物名称
+monster_id[int],monster_name[string]
+1,小火龙
+2,蜘蛛
+3,哥布林
+4,骷髅战士
+5,石巨人

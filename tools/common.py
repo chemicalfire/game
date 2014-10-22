@@ -3,8 +3,6 @@ import os
 import sys
 import logging #导入日志模块
 
-# 所有函数的列表
-__all__ = ['alert', 'getConfig', 'runCommand', 'fileContentReplace', 'dictKeyCmp', 'pyDictToPhpArray', 'getLuaScriptName']
 
 #定义一个输出函数
 def alert(msg, title = '') :
@@ -23,17 +21,19 @@ logging.basicConfig(
 # logging.debug('a test logging debug info')
 
 # 定义一个获取配置的函数 支持使用 . 来选取层级
-def getConfig(config, key, require = true) :
+def getConfig(config, key, require = True) :
     c = config.copy()
     for i in key.split('.') :
-        if c.has_key(i) && c[i] != None :
+        if c.has_key(i) and c[i] != None :
             c = c[i]
         elif require :
-            logging.debug('config key ' + i + ' not exists!')
+            logging.error('config key ' + i + ' not exists!')
         else :
             return None
 
     return c
+
+
 
 # 定义一个执行命令的函数
 def runCommand(cmd) :
@@ -54,53 +54,6 @@ def fileContentReplace(filename, search, replace) :
     fileHandler.close()
 
 
-# 定义一个比较字典键 用来排序用的函数
-def dictKeyCmp(k1, k2) :
-    if type(k1) == str and type(k2) == str and k1.isdigit() and k2.isdigit()
-        return cmp(int(k1), int(k2))
-    return cmp(k1, k2)
-
-# 定义一个将python字典转换成php的array格式
-def pyDictToPhpArray(key, value, indent) :
-    prefix = '    ' * indent
-    if indent > 0 :
-        suffix = ','
-    else :
-        suffix = ';'
-
-    code = ''
-
-    if key != None :
-        if type(key) == int :
-            key = str(key)
-        key = key.replace("'", "\\'")
-        code = code + prefix + "'" + key + "' => "
-
-    if type(value) == dict :
-        code = code + "array(\n"
-        for k in sorted(value.iterkeys(), dictKeyCmp) :
-            v = value[k]
-            code = code + pyDictToPhpArray(k, v, indent + 1) # 递归调用
-        code = code + prefix + ")" + suffix + "\n"
-    elif type(value) == list :
-        code = code + "array(\n"
-        for k in range(len(value)) :
-            v = value[k]
-            code = code + pyDictToPhpArray(k, v, indent + 1) # 递归调用
-        code = code + prefix + ")" + suffix + "\n"
-    elif type(value) == int or type(value) == float:
-        code = code + str(value) + suffix + "\n"
-    elif type(value) == str or type(value) == unicode :
-        value = value.replace("'", "\\'")
-        code = code + "'" + value + "'" + suffix + "\n"
-    else :
-        logging.warning("未知的类型 %s"%type(value))
-
-    return code
-
-# 定义一个获取lua脚本文件的文件名的函数
-def getLuaScriptName(filename) :
-    return filename[ 0 : filename.rindex('.lua') ].replace('/','.').replace('\\','.')
 
 # 定义删除目录下文件的函数
 def delDirectoryRecursive(dir) :
