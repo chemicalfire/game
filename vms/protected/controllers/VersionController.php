@@ -36,7 +36,19 @@ class VersionController extends Controller
 
     public function actionCreate()
     {
-
-        return $this->render('create');
+        $front_versions = array();
+        $front_version = null;
+        $backend_versions = array();
+        $backend_version = null;
+        $script_versions = array();
+        $script_version = null;
+        return $this->render('create', array(
+            'front_versions' => $front_versions,
+            'front_version' => $front_version,
+            'backend_versions' => $backend_versions,
+            'backend_version' => $backend_version,
+            'script_versions' => $script_versions,
+            'script_version' => $script_version,
+        ));
     }
 }

@@ -24,7 +24,7 @@ $appConfig = require_once dirname(__FILE__) . '/../../config.php';
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'"'. $appConfig['game'] . '"版本控制系统',
+	'name'=>'"'. $appConfig['game'] . '"版本管理系统',
 	'defaultController' => 'home/index', // set default controller to HomeController
 	'theme' => 'metronic',
 
@@ -129,7 +129,7 @@ return array(
                 array('icon' => 'home', 'title' => '首页', 'url' => array('/home/index')),
                 array('icon' => 'folder', 'title' => '版本管理', 'items' => array(
                     array('icon' => 'docs', 'title' => '历史版本', 'url' => array('/version/list')),
-                    array('icon' => 'doc', 'title' => '发布版本', 'url' => array('/version/create')),
+                    array('icon' => 'doc', 'title' => '创建版本', 'url' => array('/version/create')),
                 )),
                 /*
                 array('icon' => 'folder', 'title' => 'Multi Level Menu', 'items' => array(
