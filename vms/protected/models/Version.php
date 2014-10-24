@@ -9,7 +9,11 @@ class Version extends CActiveRecord
     public $code;
     public $create;
     public $log;
-    public $modules;
+    public $backend;
+    public $frontend;
+    public $script;
+    public $config;
+    public $asset;
     public $status;
 
 

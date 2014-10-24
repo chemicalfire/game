@@ -36,19 +36,19 @@ class VersionController extends Controller
 
     public function actionCreate()
     {
+        // 定义版本参数
         $front_versions = array();
-        $front_version = null;
         $backend_versions = array();
-        $backend_version = null;
         $script_versions = array();
-        $script_version = null;
+        $config_versions = array();
+        $asset_versions = array();
+
         return $this->render('create', array(
             'front_versions' => $front_versions,
-            'front_version' => $front_version,
             'backend_versions' => $backend_versions,
-            'backend_version' => $backend_version,
             'script_versions' => $script_versions,
-            'script_version' => $script_version,
+            'config_versions' => $config_versions,
+            'asset_versions' => $asset_versions,
         ));
     }
 }

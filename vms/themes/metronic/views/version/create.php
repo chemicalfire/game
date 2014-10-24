@@ -13,12 +13,11 @@ $this->pageLevelPluginStyles[] = array(
 $this->pageScripts[] = <<<SCRIPT
 jQuery('.select2').select2();
 SCRIPT;
-!isset($front_version) && $front_version = null;
-!isset($backend_version) && $backend_version = null;
-!isset($script_version) && $script_version = null;
 !isset($front_versions) && $front_versions = array();
 !isset($backend_versions) && $backend_versions = array();
 !isset($script_versions) && $script_versions = array();
+!isset($config_versions) && $config_versions = array();
+!isset($asset_versions) && $asset_versions = array();
 ?>
 <div class="row"">
     <div class="col-md-12">
@@ -44,10 +43,10 @@ SCRIPT;
                         <div class="form-group">
                             <label class="col-md-3 control-label">前端版本</label>
                             <div class="col-md-5">
-                                <select style="padding: 0px; padding-top: 5px;" class="select2 col-md-12" placeholder="请选择" name="version[modules][frontend]">
+                                <select style="padding: 0px; padding-top: 5px;" class="select2 col-md-12" placeholder="请选择" name="version[frontend]">
                                     <option></option>
                                     <?php foreach ($front_versions as $version) : ?>
-                                        <option value="<?php echo $version; ?>" <?php if ($version == $front_version) : ?>selected="selected" <?php endif; ?>><?php echo $version; ?></option>
+                                        <option value="<?php echo $version; ?>"><?php echo $version; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -58,10 +57,10 @@ SCRIPT;
                         <div class="form-group">
                             <label class="col-md-3 control-label">后端版本</label>
                             <div class="col-md-5">
-                                <select style="padding: 0px; padding-top: 5px;" class="select2 col-md-12" placeholder="请选择" name="version[modules][backend]">
+                                <select style="padding: 0px; padding-top: 5px;" class="select2 col-md-12" placeholder="请选择" name="version[backend]">
                                     <option></option>
                                     <?php foreach ($backend_versions as $version) : ?>
-                                        <option value="<?php echo $version; ?>" <?php if ($version == $backend_version) : ?>selected="selected" <?php endif; ?>><?php echo $version; ?></option>
+                                        <option value="<?php echo $version; ?>"><?php echo $version; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -72,15 +71,43 @@ SCRIPT;
                         <div class="form-group">
                             <label class="col-md-3 control-label">脚本版本</label>
                             <div class="col-md-5">
-                                <select style="padding: 0px; padding-top: 5px;" class="select2 col-md-12" placeholder="请选择" name="version[modules][script]">
+                                <select style="padding: 0px; padding-top: 5px;" class="select2 col-md-12" placeholder="请选择" name="version[script]">
                                     <option></option>
                                     <?php foreach ($script_versions as $version) : ?>
-                                        <option value="<?php echo $version; ?>" <?php if ($version == $script_version) : ?>selected="selected" <?php endif; ?>><?php echo $version; ?></option>
+                                        <option value="<?php echo $version; ?>"><?php echo $version; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <span class="help-block">脚本代码版本分支</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">配置版本</label>
+                            <div class="col-md-5">
+                                <select style="padding: 0px; padding-top: 5px;" class="select2 col-md-12" placeholder="请选择" name="version[config]">
+                                    <option></option>
+                                    <?php foreach ($config_versions as $version) : ?>
+                                        <option value="<?php echo $version; ?>"><?php echo $version; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="help-block">配置版本分支</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">asset版本</label>
+                            <div class="col-md-5">
+                                <select style="padding: 0px; padding-top: 5px;" class="select2 col-md-12" placeholder="请选择" name="version[asset]">
+                                    <option></option>
+                                    <?php foreach ($asset_versions as $version) : ?>
+                                        <option value="<?php echo $version; ?>"><?php echo $version; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="help-block">asset版本分支</span>
                             </div>
                         </div>
                     </div>
