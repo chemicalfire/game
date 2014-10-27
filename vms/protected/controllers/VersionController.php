@@ -37,18 +37,11 @@ class VersionController extends Controller
     public function actionCreate()
     {
         // 定义版本参数
-        $front_versions = array();
-        $backend_versions = array();
-        $script_versions = array();
-        $config_versions = array();
-        $asset_versions = array();
+        $subVersions = array();
+        foreach (SubVersion::model()->findAll('1 order by `create` desc') as $v) {
+            $subVersions[$v->type . '_versions'][$v->version] = $v->version;
+        }
 
-        return $this->render('create', array(
-            'front_versions' => $front_versions,
-            'backend_versions' => $backend_versions,
-            'script_versions' => $script_versions,
-            'config_versions' => $config_versions,
-            'asset_versions' => $asset_versions,
-        ));
+        return $this->render('create', $subVersions);
     }
 }

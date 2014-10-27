@@ -5,9 +5,9 @@ $this->breadcrumbs[] = array('title' => '历史版本', 'link' => array('version
 ?>
 <div class="row">
     <div class="col-md-12">
-        <a href="<?php echo CHtml::normalizeUrl(array('version/create')); ?>" class="btn btn-circle btn-default pull-right">
+        <a href="<?php echo CHtml::normalizeUrl(array('version/create')); ?>" class="btn yellow pull-right">
             <i class="fa fa-plus"></i>
-            <span class="hidden-480">发布版本</span>
+            <span class="hidden-480">创建版本</span>
         </a>
     </div>
 </div>
