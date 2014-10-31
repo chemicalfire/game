@@ -14,8 +14,9 @@ def gitTag(dir) :
 
     # 执行git_tag.sh文件
     toolDir = os.path.abspath(dir + os.sep + '..' + os.sep + '..' + os.sep + 'tools')
-    file = os.popen(toolDir + os.sep + 'git_tag.sh git_create_tag ' + dir)
-    file.read()
+    cmd = '/bin/bash ' + toolDir + os.sep + 'git_tag.sh create_tag ' + dir
+    print cmd
+    file = os.popen(cmd)
 
 def backendTag(config) :
     projectRoot = config['project_root']
