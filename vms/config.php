@@ -22,8 +22,8 @@ return array (
     'online_date' => '2014-11-11', // 项目上线日期
     // developers
     'members' => array(
-        array('name' => '刘立悟', 'email' => 'liwu@9173.com', 'roles' => array('admin', 'developer')),
-        array('name' => '魏龙', 'email' => 'weilong@9173.com', 'roles' => array('developer')),
+        array('name' => '刘立悟', 'email' => 'liwu@9173.com', 'roles' => array('管理员', '开发者')),
+        array('name' => '魏龙', 'email' => 'weilong@9173.com', 'roles' => array('开发者')),
     ),
     'deploy_id' => 'dev', // 部署机代号
     'vms_code_path' => __DIR__,
