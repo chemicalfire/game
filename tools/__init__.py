@@ -4,8 +4,8 @@ import sys
 from common import * # 加载通用方法文件
 
 # 加载MySQLdb模块
-if sys.platform != 'win32' :
-    import MySQLdb
+#if sys.platform != 'win32' :
+#    import MySQLdb
 
 
 # 定义操作

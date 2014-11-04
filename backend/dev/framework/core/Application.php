@@ -7,9 +7,13 @@ class core_Application
 {
 
 
-
-    public function run($module)
+    public function __construct()
     {
 
+    }
+
+
+    public function run()
+    {
     }
 }
